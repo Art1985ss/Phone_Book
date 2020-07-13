@@ -1,4 +1,4 @@
-package phonebook;
+package phonebook.service;
 
 import phonebook.entities.Contact;
 import phonebook.entities.User;
@@ -26,10 +26,10 @@ public class FileService {
         return text;
     }
 
-    public static List<Contact> getContacts() {
+    public static List<Contact> getContacts(String filePath) {
         List<Contact> contacts = new ArrayList<>();
         try (Scanner scanner = new Scanner(
-                new File(FIRST_PATH_PART + "sortedContacts.txt"))) {
+                new File(FIRST_PATH_PART + filePath))) {
             while (scanner.hasNext()) {
                 Contact contact = new Contact();
                 String[] params = scanner.nextLine().split("\\s");

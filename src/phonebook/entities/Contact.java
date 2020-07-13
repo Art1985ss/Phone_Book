@@ -1,6 +1,8 @@
 package phonebook.entities;
 
-public class Contact {
+import org.jetbrains.annotations.NotNull;
+
+public class Contact implements Comparable<Contact> {
     private String number;
     private String name;
 
@@ -18,5 +20,15 @@ public class Contact {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return number + " " + name;
+    }
+
+    @Override
+    public int compareTo(@NotNull Contact contact) {
+        return name.compareTo(contact.getName());
     }
 }
