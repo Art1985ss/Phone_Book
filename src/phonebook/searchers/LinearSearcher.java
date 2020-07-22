@@ -11,7 +11,6 @@ public class LinearSearcher extends Searcher {
 
     @Override
     public void search() {
-        System.out.println("Start searching (linear search)...");
         timer.start();
         for (User user : users) {
             for (Contact contact : contacts) {

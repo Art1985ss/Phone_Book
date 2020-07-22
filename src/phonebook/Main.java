@@ -1,26 +1,29 @@
 package phonebook;
 
-import phonebook.entities.Contact;
-import phonebook.searchers.JumpSearch;
-import phonebook.searchers.Searcher;
-import phonebook.service.FileService;
-import phonebook.service.SorterService;
-import phonebook.service.Timer;
-
-import java.util.List;
+import phonebook.searchers.*;
 
 public class Main {
     public static void main(String[] args) {
-        Timer timer = new Timer();
-        timer.start();
-        Searcher searcher = new JumpSearch();
+        System.out.println("Start searching (linear search)...");
+        Searcher searcher = new LinearSearcher();
         searcher.search();
         System.out.println(searcher);
-//        List<Contact> contacts = FileService.getContacts("directory.txt");
-//        contacts = SorterService.bubbleSortContacts(contacts);
-//        FileService.writeToFile("sortedContacts.txt", contacts);
-        timer.stop();
-        System.out.println(timer);
+        System.out.println();
+        System.out.println("Start searching (bubble sort + jump search)...");
+        JumpSearch jumpSearch = new JumpSearch();
+        jumpSearch.setMaxSortTime(searcher.getDuration() * 10);
+        jumpSearch.search();
+        System.out.println(jumpSearch);
+        System.out.println();
+        System.out.println("Start searching (quick sort + binary search)...");
+        searcher = new BinarySearch();
+        searcher.search();
+        System.out.println(searcher);
+        System.out.println();
+        searcher = new HashSearch();
+        searcher.search();
+        System.out.println(searcher);
     }
+
 
 }

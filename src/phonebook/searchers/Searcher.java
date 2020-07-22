@@ -21,7 +21,7 @@ public abstract class Searcher {
         List<User> userList = FileService.getUsers();
         users = new User[userList.size()];
         userList.toArray(users);
-        List<Contact> contactList = FileService.getContacts("sortedContacts.txt");
+        List<Contact> contactList = FileService.getContacts("directory.txt");
         contacts = new Contact[contactList.size()];
         contactList.toArray(contacts);
         peopleCount = users.length;
@@ -29,10 +29,21 @@ public abstract class Searcher {
 
     public abstract void search();
 
+    public long getDuration() {
+        return timer.getDuration();
+    }
+
+    public Contact[] getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Contact[] contacts) {
+        this.contacts = contacts;
+    }
 
     @Override
     public String toString() {
-        return String.format("Found %d / %d entities. %s",
+        return String.format("Found %d / %d entities. Time taken: %s",
                 foundNumbers, peopleCount, timer);
     }
 }

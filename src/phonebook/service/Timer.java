@@ -6,23 +6,32 @@ public class Timer {
     private long start = 0;
     private long stop = 0;
     private long duration = 0;
-    //TODO correct class to work for multiple tasks
+    private boolean running = false;
+
     public void start() {
         start = System.currentTimeMillis();
+        running = true;
     }
 
     public void stop() {
         stop = System.currentTimeMillis();
         duration = stop - start;
+        running = false;
     }
 
     public long getDuration() {
-        duration = System.currentTimeMillis() - start;
+        if (running) {
+            return System.currentTimeMillis() - start;
+        }
         return duration;
     }
 
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
     private String getFormattedDuration() {
-        long millis = duration;
+        long millis = getDuration();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
         millis -= TimeUnit.MINUTES.toMillis(minutes);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
@@ -32,6 +41,6 @@ public class Timer {
 
     @Override
     public String toString() {
-        return "Time taken : " + getFormattedDuration();
+        return getFormattedDuration();
     }
 }
